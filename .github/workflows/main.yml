@@ -1,0 +1,23 @@
+name: Build Installer
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Inno Setup
+        run: choco install innosetup
+
+      - name: Create Installer
+        run: iscc /path/to/your/setup_script.iss
+
+      - name: Upload Installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: MyPythonInstaller
+          path: /path/to/output/installer.exe
